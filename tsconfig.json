@@ -1,0 +1,13 @@
+{
+  "files": [
+    "src/*.ts",
+    "src/model/*.ts"
+  ],
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "lib": ["es2015"],
+    "target": "es5",
+    "moduleResolution": "node",
+    "types": ["node", "mocha"]
+  }
+}
