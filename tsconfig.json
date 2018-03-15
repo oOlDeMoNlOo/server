@@ -1,13 +1,17 @@
 {
   "files": [
-    "src/*.ts",
-    "src/model/*.ts"
+    "src/index.ts"
   ],
   "compilerOptions": {
     "noImplicitAny": true,
+    "rootDir": "src",
+    "outDir": "dist",
     "lib": ["es2015"],
     "target": "es5",
     "moduleResolution": "node",
-    "types": ["node", "mocha"]
-  }
+    "types": ["node"]
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
