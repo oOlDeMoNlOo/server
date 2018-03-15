@@ -4,9 +4,10 @@ import * as socketIo from 'socket.io';
 
 import {Socket} from 'socket.io';
 import SocketIO = require('socket.io');
+import {ConfigServer} from './config/server';
+import {User} from './model/user/user';
 
 export class StudentServer{
-    public static PORT = 4201;
     private app: express.Application;
     private server: Server;
     private io: SocketIO.Server;
@@ -16,6 +17,7 @@ export class StudentServer{
         this.createServer();
         this.sockets();
         this.listen();
+        new User();
     }
 
     private createApp(): void {
@@ -32,8 +34,8 @@ export class StudentServer{
     }
 
     private listen(): void {
-        this.server.listen(StudentServer.PORT, () => {
-            console.log('Running server on PORT %s', StudentServer.PORT);
+        this.server.listen(ConfigServer.PORT,ConfigServer.HOST ,() => {
+            console.log(`Сервер запущен на ${ConfigServer.HOST}:${ConfigServer.PORT}`);
         });
 
         this.io.on('connect', (socket: Socket) => {
