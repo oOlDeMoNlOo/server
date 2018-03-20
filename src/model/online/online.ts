@@ -1,24 +1,24 @@
 import {User} from '../user/user';
 
 export class Online {
-    private userOnline: User[];
+    private static userOnline: User[] = [];
 
     constructor() {
     }
 
-    addOnlineUser(user: User): void {
+    static addOnlineUser(user: User): void {
         this.userOnline.push(user);
     }
 
-    removeOnlineUser(user: User): void{
+    static removeOnlineUser(user: User): void{
         this.userOnline.splice(this.userOnline.indexOf(user), 1);
     }
 
-    get(): User[] {
+    static get(): User[] {
         return this.userOnline;
     }
 
-    count(): number{
+    static count(): number{
         return this.userOnline.length;
     }
 }

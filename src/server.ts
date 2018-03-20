@@ -6,6 +6,7 @@ import {Socket} from 'socket.io';
 import SocketIO = require('socket.io');
 import {ConfigServer} from './config/server';
 import {User} from './model/user/user';
+import {Online} from "./model/online/online";
 
 export class StudentServer{
     private app: express.Application;
@@ -17,7 +18,6 @@ export class StudentServer{
         this.createServer();
         this.sockets();
         this.listen();
-        new User();
     }
 
     private createApp(): void {
@@ -37,9 +37,9 @@ export class StudentServer{
         this.server.listen(ConfigServer.PORT,ConfigServer.HOST ,() => {
             console.log(`Сервер запущен на ${ConfigServer.HOST}:${ConfigServer.PORT}`);
         });
-
-        this.io.on('connect', (socket: Socket) => {
+            this.io.on('connect', (socket: Socket) => {
             console.log(`Connected client. id: ${socket.id}, ip: ${JSON.stringify(socket.handshake.address)}`);
+            new User(socket);
             socket.on('message', (m: string) => {
                 console.log('[server](message): %s', JSON.stringify(m));
                 this.io.emit('message', m);
