@@ -21,4 +21,8 @@ export class Online {
     static count(): number{
         return this.userOnline.length;
     }
+
+    static getUserByUsername(username: string): User{
+        return this.userOnline.find((value, index) => value.info.user_name == username);
+    }
 }

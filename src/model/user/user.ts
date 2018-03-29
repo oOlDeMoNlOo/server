@@ -1,14 +1,21 @@
 ///<reference path="../../../node_modules/@types/bcrypt/index.d.ts"/>
 import {Socket} from 'socket.io';
 import {Login} from "../auth/login/login";
+import {UserInterface} from "../../common/userInterface";
 
 export class User {
-    private id: string;
-    private name: string;
+    info: UserInterface;
 
     constructor(public socket: Socket) {
         new Login(this);
     }
 
+    setInfo(info : UserInterface){
+        this.info = info;
+    }
+
+    deleteInfo(){
+        delete this.info;
+    }
 
 }
